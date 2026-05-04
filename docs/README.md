@@ -39,7 +39,6 @@
 - [regex](../regex/README.md)：常见格式正则校验。
 - [rsa](../rsa/README.md)：RSA 加解密和签名。
 - [slice](../slice/README.md)：切片辅助。
-- [snowflake](../snowflake/README.md)：Snowflake ID。
 - [sort](../sort/README.md)：排序辅助。
 - [string](../string/README.md)：字符串转换辅助。
 - [thread](../thread/README.md)：goroutine 安全执行。
