@@ -8,11 +8,15 @@
 code := randompkg.VerifyCode(6)
 token := randompkg.Token(32)
 password := randompkg.Password(12)
+secureToken, err := randompkg.SecureToken(32)
+secureURLToken, err := randompkg.SecureBase64URL(32)
 ```
 
 ## 注意事项
 
-当前包基于 `math/rand`，不适合生成高安全等级密钥；安全 token 应使用 `crypto/rand`。
+- `Token`、`Password`、`VerifyCode` 等历史函数基于 `math/rand`，只适合非安全随机场景。
+- 安全 token、重置密码链接、外部认证随机串等场景使用 `SecureToken`、`SecureHex` 或 `SecureBase64URL`。
+- 安全随机函数基于 `crypto/rand`，会返回 error，调用方必须处理。
 
 ## 验证
 

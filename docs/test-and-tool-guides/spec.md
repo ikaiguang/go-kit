@@ -95,3 +95,5 @@
 - 已完成逐目录扫描并新增 `docs/test-and-tool-guides/audit.md`，列出每个目录的已处理项、暂未改代码原因和后续建议。
 - 已补充 `curl` 的 context 请求构造和 PUT/PATCH/DELETE 便捷构造，并更新测试与 README。
 - 已补充/优化 `download`、`header`、`page`、`buffer`、`file`、`ip`、`reflect`、`thread`、`zip` 等目录的明确能力缺口或边界风险，并补测试与 README。
+- 已按用户要求优化 `random` 安全随机能力：新增基于 `crypto/rand` 的安全随机 API，不改变现有 `math/rand` 函数语义，并补测试与 README。
+- 用户要求总结一份可应用到其他代码库的提示词。已新增 `docs/test-and-tool-guides/reusable-prompt.md`，沉淀测试覆盖、能力缺口、安全/性能风险、文档拆分和验证要求。

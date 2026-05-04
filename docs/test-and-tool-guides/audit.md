@@ -19,7 +19,7 @@
 | `id` | `IPV4ToNodeID` 遇到 IPv6 可能 panic | 增加 IPv4 校验并补测试 |
 | `ip` | 私网 IPv4 判断对非 IPv4 输入可能越界 | 使用 `To4()` 后判断并补测试 |
 | `page` | 部分分页 helper 对 nil 输入不稳 | `ConvertToPageOption`、`HasNextPage`、`CalcPageResponse` 增加 nil 安全 |
-| `random` | 空字符集、负长度、负采样等边界输入可能 panic | 增加边界返回并补测试 |
+| `random` | 空字符集、负长度、负采样等边界输入可能 panic；安全 token 需要 `crypto/rand` API | 增加边界返回；新增 `SecureBytes`、`SecureString`、`SecureToken`、`SecureHex`、`SecureBase64URL` 并补测试 |
 | `reflect` | nil 或不可设置值可能 panic | 增加 nil 和 CanSet 防御并补测试 |
 | `thread` | `Go/GoSafe` 不便传 context | 新增 `GoWithContext`，并让 `GoSafeWithContext` 处理 nil context |
 | `zip` | 解压路径穿越风险；压缩大文件一次性读入内存；目标 zip 目录需预先存在 | 防 zip slip；改流式复制；自动创建目标目录 |
@@ -52,5 +52,4 @@
 ## 后续建议
 
 - `locker` 和 `writer` 的测试仍存在真实 `time.Sleep`，后续如要进一步优化测试速度，可考虑引入可配置过期时间或 clock 注入。
-- `random` 当前基于 `math/rand`，只适合非安全随机；如需要安全 token，应新增 `crypto/rand` 专用 API，而不是改变现有函数语义。
 - `snowflake` 目录当前 build tag 为 `ignore`，如需要正式暴露该包，应单独评估包名、测试和与 `id` 包的职责边界。
