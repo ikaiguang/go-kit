@@ -1,11 +1,13 @@
 package idpkg
 
 import (
-	"github.com/stretchr/testify/require"
 	"math"
 	"strconv"
 	"testing"
 	"time"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // ===== Benchmark =====
@@ -113,4 +115,16 @@ func TestAll_NextID(t *testing.T) {
 	} else {
 		t.Log("==> bwmarrinSnowflake is better than sonySonyflake, gt: ", (n2latency - n1latency).String())
 	}
+}
+
+func TestIPV4ToNodeID(t *testing.T) {
+	got, err := IPV4ToNodeID("192.168.1.2")
+	require.NoError(t, err)
+	assert.Equal(t, uint16(258), got)
+
+	_, err = IPV4ToNodeID("2001:db8::1")
+	require.Error(t, err)
+
+	_, err = IPV4ToNodeID("invalid")
+	require.Error(t, err)
 }

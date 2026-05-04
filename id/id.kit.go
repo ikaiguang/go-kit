@@ -95,9 +95,13 @@ func IPV4ToNodeID(ip string) (uint16, error) {
 	if ipAddr == nil {
 		return 0, fmt.Errorf("invalid IP address: %s", ip)
 	}
+	ipv4 := ipAddr.To4()
+	if ipv4 == nil {
+		return 0, fmt.Errorf("invalid IPv4 address: %s", ip)
+	}
 
 	var lastTwoBytes [2]byte
-	copy(lastTwoBytes[:], ipAddr.To4()[2:])
+	copy(lastTwoBytes[:], ipv4[2:])
 
 	nodeId := uint16(lastTwoBytes[0])<<8 | uint16(lastTwoBytes[1])
 	return nodeId, nil

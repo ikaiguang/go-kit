@@ -1,6 +1,7 @@
 package zippkg
 
 import (
+	"archive/zip"
 	"os"
 	"path/filepath"
 	"testing"
@@ -115,4 +116,28 @@ func TestZipFile_SrcNotExist(t *testing.T) {
 func TestUnzip_ZipNotExist(t *testing.T) {
 	err := Unzip("/nonexistent/file.zip", testdataDir)
 	assert.NotNil(t, err)
+}
+
+func TestUnzip_RejectsZipSlip(t *testing.T) {
+	setup(t)
+	defer teardown()
+
+	zipPath := filepath.Join(testdataDir, "evil.zip")
+	file, err := os.Create(zipPath)
+	require.Nil(t, err)
+	zipWriter := zip.NewWriter(file)
+	w, err := zipWriter.Create("../evil.txt")
+	require.Nil(t, err)
+	_, err = w.Write([]byte("evil"))
+	require.Nil(t, err)
+	require.Nil(t, zipWriter.Close())
+	require.Nil(t, file.Close())
+
+	unzipDir := filepath.Join(testdataDir, "unzipped")
+	err = Unzip(zipPath, unzipDir)
+	require.NotNil(t, err)
+	assert.Contains(t, err.Error(), "illegal file path")
+
+	_, err = os.Stat(filepath.Join(testdataDir, "evil.txt"))
+	assert.True(t, os.IsNotExist(err))
 }

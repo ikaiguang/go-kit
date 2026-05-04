@@ -31,6 +31,14 @@ func TestStrings(t *testing.T) {
 	})
 }
 
+func TestRandomStringBoundary(t *testing.T) {
+	assert.Empty(t, Strings(-1))
+	assert.Empty(t, Letter(-1))
+	assert.Empty(t, Numeric(-1))
+	assert.Empty(t, String(8, ""))
+	assert.Empty(t, String(-1, CharsetAlphabet))
+}
+
 func TestLetter(t *testing.T) {
 	t.Run("长度正确", func(t *testing.T) {
 		result := Letter(10)
@@ -257,6 +265,11 @@ func TestSample(t *testing.T) {
 		copy(original, slice)
 		Sample(slice, 3)
 		assert.Equal(t, original, slice)
+	})
+
+	t.Run("n小于等于0返回空切片", func(t *testing.T) {
+		assert.Empty(t, Sample([]int{1, 2, 3}, 0))
+		assert.Empty(t, Sample([]int{1, 2, 3}, -1))
 	})
 }
 

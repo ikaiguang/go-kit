@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log/slog"
 	"os/exec"
+	"strings"
 
 	bufferpkg "github.com/ikaiguang/go-kit/buffer"
 )
@@ -52,8 +53,11 @@ func run(cmdHandler *exec.Cmd) (output []byte, err error) {
 
 	// run
 	if err = cmdHandler.Run(); err != nil {
-		err = fmt.Errorf("%s", stderr.Bytes())
-		return output, err
+		errText := strings.TrimSpace(stderr.String())
+		if errText == "" {
+			return output, err
+		}
+		return output, fmt.Errorf("%w: %s", err, errText)
 	}
 
 	// 在归还 buffer 前复制数据，避免数据竞争

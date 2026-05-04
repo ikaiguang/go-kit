@@ -2,9 +2,11 @@ package zippkg
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 
 	filepkg "github.com/ikaiguang/go-kit/file"
 	filepathpkg "github.com/ikaiguang/go-kit/filepath"
@@ -122,7 +124,10 @@ func Unzip(zipPath, unzipResourceDir string) (err error) {
 // @param unzipResourceDir 解缩到zip的路径；例: runtime/videos
 func UnzipFn(zipFile *zip.File, unzipResourceDir string) (err error) {
 	// 输出文件
-	outputPath := filepath.Join(unzipResourceDir, zipFile.Name)
+	outputPath, err := safeUnzipPath(unzipResourceDir, zipFile.Name)
+	if err != nil {
+		return err
+	}
 
 	// 创建文件夹
 	if zipFile.FileInfo().IsDir() {
@@ -153,4 +158,19 @@ func UnzipFn(zipFile *zip.File, unzipResourceDir string) (err error) {
 		return err
 	}
 	return err
+}
+
+func safeUnzipPath(destDir, zipFileName string) (string, error) {
+	cleanDest, err := filepath.Abs(destDir)
+	if err != nil {
+		return "", err
+	}
+	outputPath, err := filepath.Abs(filepath.Join(cleanDest, zipFileName))
+	if err != nil {
+		return "", err
+	}
+	if outputPath != cleanDest && !strings.HasPrefix(outputPath, cleanDest+string(os.PathSeparator)) {
+		return "", fmt.Errorf("illegal file path in zip: %s", zipFileName)
+	}
+	return outputPath, nil
 }
