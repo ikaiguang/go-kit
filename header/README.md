@@ -9,6 +9,8 @@ if headerpkg.ContainsValue(req.Header, "Connection", "upgrade") {
 	// ...
 }
 req.Header.Set(headerpkg.ContentType, headerpkg.ContentTypeJSON)
+headerpkg.SetRequestID(req.Header, "request-id")
+headerpkg.SetContentType(req.Header, headerpkg.ContentTypeJSON)
 ```
 
 ## 注意事项

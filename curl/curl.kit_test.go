@@ -2,6 +2,7 @@ package curlpkg
 
 import (
 	"bytes"
+	"context"
 	"crypto/tls"
 	"errors"
 	"io"
@@ -28,6 +29,33 @@ func TestNewRequest(t *testing.T) {
 	getReq, err := NewGetRequest("http://example.com/get", nil)
 	require.NoError(t, err)
 	assert.Equal(t, http.MethodGet, getReq.Method)
+
+	putReq, err := NewPutRequest("http://example.com/put", nil)
+	require.NoError(t, err)
+	assert.Equal(t, http.MethodPut, putReq.Method)
+
+	patchReq, err := NewPatchRequest("http://example.com/patch", nil)
+	require.NoError(t, err)
+	assert.Equal(t, http.MethodPatch, patchReq.Method)
+
+	deleteReq, err := NewDeleteRequest("http://example.com/delete", nil)
+	require.NoError(t, err)
+	assert.Equal(t, http.MethodDelete, deleteReq.Method)
+}
+
+func TestNewRequestContext(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	req, err := NewRequestContext(ctx, http.MethodDelete, "http://example.com/delete", nil)
+	require.NoError(t, err)
+	assert.Equal(t, http.MethodDelete, req.Method)
+	assert.Equal(t, context.Canceled, req.Context().Err())
+
+	req, err = NewPutRequestContext(nil, "http://example.com/put", bytes.NewBufferString("body"))
+	require.NoError(t, err)
+	assert.Equal(t, http.MethodPut, req.Method)
+	assert.NotNil(t, req.Context())
 }
 
 func TestNewHTTPClient(t *testing.T) {

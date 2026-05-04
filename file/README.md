@@ -12,7 +12,7 @@ sum, size, err := filepkg.Hash("./b.txt")
 
 ## 注意事项
 
-移动文件依赖 `os.Rename`，跨设备移动可能失败；调用前确认目标目录存在。
+`CopyFile` 和 `MoveFileToDir` 会自动创建目标目录。移动文件依赖 `os.Rename`，跨设备移动可能失败。
 
 ## 验证
 

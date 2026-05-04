@@ -11,6 +11,9 @@ threadpkg.GoSafe(func() {
 threadpkg.GoSafeWithContext(ctx, func(ctx context.Context) {
 	// async work with context
 })
+threadpkg.GoWithContext(ctx, func(ctx context.Context) {
+	// alias of GoSafeWithContext
+})
 ```
 
 ## 注意事项

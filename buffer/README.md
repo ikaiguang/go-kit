@@ -12,7 +12,7 @@ buf.WriteString("hello")
 
 ## 注意事项
 
-归还后不要继续读写该 buffer；跨 goroutine 使用时由调用方保证生命周期。
+归还后不要继续读写该 buffer；跨 goroutine 使用时由调用方保证生命周期。`PutBuffer(nil)` 会直接返回。
 
 ## 验证
 

@@ -40,6 +40,22 @@ func TestZipFile(t *testing.T) {
 	assert.Greater(t, info.Size(), int64(0))
 }
 
+func TestZipFile_CreateDestDir(t *testing.T) {
+	setup(t)
+	defer teardown()
+
+	srcFile := filepath.Join(testdataDir, "test.txt")
+	require.Nil(t, os.WriteFile(srcFile, []byte("hello zip"), 0644))
+
+	zipPath := filepath.Join(testdataDir, "nested", "test.txt.zip")
+	err := ZipFile(srcFile, zipPath)
+	require.Nil(t, err)
+
+	info, err := os.Stat(zipPath)
+	require.Nil(t, err)
+	assert.Greater(t, info.Size(), int64(0))
+}
+
 // go test -v -count 1 ./kit/zip -run TestZip_Directory
 func TestZip_Directory(t *testing.T) {
 	setup(t)

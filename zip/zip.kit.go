@@ -25,6 +25,9 @@ func Zip(resourcePath string, zipPath string) error {
 		return ZipFile(resourcePath, zipPath)
 	}
 
+	if err := os.MkdirAll(filepath.Dir(zipPath), filepkg.DefaultFileMode); err != nil {
+		return err
+	}
 	targetFile, err := os.Create(zipPath)
 	if err != nil {
 		return err
@@ -59,6 +62,9 @@ func Zip(resourcePath string, zipPath string) error {
 // @param filePath 被压缩资源；例: runtime/videos/a.mp4
 // @param zipPath 压缩到zip的路径；例: runtime/zip/videos.zip
 func ZipFile(filePath string, zipPath string) error {
+	if err := os.MkdirAll(filepath.Dir(zipPath), filepkg.DefaultFileMode); err != nil {
+		return err
+	}
 	targetFile, err := os.Create(zipPath)
 	if err != nil {
 		return err
@@ -80,11 +86,11 @@ func ZipFile(filePath string, zipPath string) error {
 // @param srcFilePath 被压缩资源；例: runtime/videos/xxx.mp4
 // @param zipFilePath 压缩到zip的路径；例: videos/test.mp4
 func AddFileToZip(zipWriter *zip.Writer, srcFilePath, zipFilePath string) error {
-	// XXX: Read with buffer.
-	content, err := os.ReadFile(srcFilePath)
+	srcFile, err := os.Open(srcFilePath)
 	if err != nil {
 		return err
 	}
+	defer func() { _ = srcFile.Close() }()
 
 	// 写入文件
 	zipFile, err := zipWriter.Create(zipFilePath)
@@ -93,7 +99,7 @@ func AddFileToZip(zipWriter *zip.Writer, srcFilePath, zipFilePath string) error 
 	}
 
 	// // 写入文件
-	_, err = zipFile.Write(content)
+	_, err = io.Copy(zipFile, srcFile)
 	if err != nil {
 		return err
 	}

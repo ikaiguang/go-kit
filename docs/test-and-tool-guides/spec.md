@@ -91,3 +91,7 @@
 - 已为每个 Go 工具目录新增或补充 `README.md`，内容保持为用途、基础用法、注意事项和验证命令。
 - 已将 `docs/tool-guides.md` 压缩为工具使用指导索引，只保留通用约定和各工具目录链接。
 - 已复查所有 Go 工具目录，结果为均已包含 `README.md`。
+- 用户指出当前工作不能只补测试和文档，还要逐目录扫描工具能力缺口并补充优化；示例为 `curl` 缺少 `context.Context` 支持和 PUT/DELETE 等常用 HTTP method 构造函数。后续执行范围扩展为：扫描每个工具目录，列举明确缺口，能低风险补齐的直接补代码、测试和 README；涉及高影响 API 变更时采用兼容新增，不破坏现有调用。
+- 已完成逐目录扫描并新增 `docs/test-and-tool-guides/audit.md`，列出每个目录的已处理项、暂未改代码原因和后续建议。
+- 已补充 `curl` 的 context 请求构造和 PUT/PATCH/DELETE 便捷构造，并更新测试与 README。
+- 已补充/优化 `download`、`header`、`page`、`buffer`、`file`、`ip`、`reflect`、`thread`、`zip` 等目录的明确能力缺口或边界风险，并补测试与 README。

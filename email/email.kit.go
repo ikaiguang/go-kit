@@ -22,7 +22,7 @@ func init() {
 	var err error
 	emailCodeTemplate, err = template.New("email_code").Parse(emailCodeHTML)
 	if err != nil {
-		panic(err)
+		emailCodeTemplate = template.Must(template.New("email_code_fallback").Parse("{{.Issuer}} verification code: {{.VerificationCode}}"))
 	}
 }
 

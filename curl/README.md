@@ -5,6 +5,8 @@
 ## 主要内容
 
 - `NewGetRequest()` / `NewPostRequest()` / `NewRequest()`
+- `NewPutRequest()` / `NewPatchRequest()` / `NewDeleteRequest()`
+- `NewGetRequestContext()` / `NewPostRequestContext()` / `NewRequestContext()`
 - `NewHTTPClient()`
 - `Do()`
 - 常用请求头和内容类型常量
@@ -17,7 +19,10 @@
 ## 基础用法
 
 ```go
-req, err := curlpkg.NewGetRequest("https://example.com", nil)
+ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+defer cancel()
+
+req, err := curlpkg.NewGetRequestContext(ctx, "https://example.com", nil)
 code, body, err := curlpkg.Do(req, curlpkg.WithTimeout(3*time.Second))
 if !curlpkg.IsSuccessCode(code) {
 	return curlpkg.ErrRequestFailure(code)
@@ -28,6 +33,7 @@ if !curlpkg.IsSuccessCode(code) {
 
 - 默认不跳过 TLS 证书校验。
 - `WithInsecureSkipVerify` 仅限开发或测试环境。
+- 优先使用 `New*RequestContext`，让调用方能控制超时和取消。
 
 ## 验证
 
