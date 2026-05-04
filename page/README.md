@@ -16,3 +16,20 @@
 ```bash
 kratos proto client kit/page/page.kit.proto
 ```
+
+## 基础用法
+
+```go
+req := pagepkg.DefaultPageRequest()
+opts := pagepkg.ConvertToPageOption(req)
+```
+
+## 注意事项
+
+调用前校验 page 和 page size，避免超大分页拖慢查询。
+
+## 验证
+
+```bash
+go test ./page
+```

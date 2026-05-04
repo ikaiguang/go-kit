@@ -14,6 +14,27 @@
 - 需要轻量 HTTP 调用，而不想直接重复写标准库样板代码
 - 需要显式控制超时或 TLS 验证选项
 
+## 基础用法
+
+```go
+req, err := curlpkg.NewGetRequest("https://example.com", nil)
+code, body, err := curlpkg.Do(req, curlpkg.WithTimeout(3*time.Second))
+if !curlpkg.IsSuccessCode(code) {
+	return curlpkg.ErrRequestFailure(code)
+}
+```
+
+## 注意事项
+
+- 默认不跳过 TLS 证书校验。
+- `WithInsecureSkipVerify` 仅限开发或测试环境。
+
+## 验证
+
+```bash
+go test ./curl
+```
+
 ## 参考
 
 - 标准库 `net/http`

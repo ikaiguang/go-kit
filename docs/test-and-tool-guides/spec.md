@@ -86,3 +86,8 @@
 - 已复查包含 Go 文件的目录，结果为所有 Go 目录均已有测试文件。
 - 已清理本次为规避系统 Go build cache 权限问题创建的 workspace `.gocache` 目录。
 - `id/id_interface.kit.go` 在 `git status` 中显示修改，但 `git diff` 内容为空，属于格式化/行尾提示带出的状态噪声，未做逻辑修改。
+- 用户指出单个 `docs/tool-guides.md` 文件过大，不利于后续按 kit 独立维护。已接受该设计调整：将每个工具的使用说明拆到对应目录文档，`docs/tool-guides.md` 仅保留索引和通用说明。
+- 用户进一步确认目录文档应使用 GitHub/GitLab 默认展示的 `README.md`，不使用 `GUIDE.md`。
+- 已为每个 Go 工具目录新增或补充 `README.md`，内容保持为用途、基础用法、注意事项和验证命令。
+- 已将 `docs/tool-guides.md` 压缩为工具使用指导索引，只保留通用约定和各工具目录链接。
+- 已复查所有 Go 工具目录，结果为均已包含 `README.md`。
