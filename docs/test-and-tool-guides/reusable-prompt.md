@@ -77,5 +77,5 @@ docs/<task-name>/
 └── reusable-prompt.md # 可复用提示词，如本文件
 
 <module>/README.md   # 每个模块自己的使用说明
-docs/tool-guides.md  # 总索引和通用约定
+docs/README.md  # 总索引和通用约定
 ```

@@ -79,17 +79,18 @@
 - 已补充 `curl` 请求、client、响应读取、错误路径测试。
 - 代码阅读过程中发现并修复额外风险：AES padding 校验不完整、`id.IPV4ToNodeID` 对 IPv6 可能 panic、`random` 边界输入可能 panic、`zip` 解压存在路径穿越风险。
 - 已为上述风险补充回归测试。
-- 已新增 `docs/tool-guides.md`，覆盖当前所有根目录工具包的用途、基础用法、注意事项和验证命令。
+- 已先新增工具使用指导总文档，覆盖当前所有根目录工具包的用途、基础用法、注意事项和验证命令。
 - 已执行 `gofmt -w aes chinese cmd connection curl id random zip`。
 - 已运行定向测试：`go test ./aes ./chinese ./cmd ./connection ./curl ./id ./random ./zip` 通过。
 - 已运行最终全量测试：`go test ./...` 通过。
 - 已复查包含 Go 文件的目录，结果为所有 Go 目录均已有测试文件。
 - 已清理本次为规避系统 Go build cache 权限问题创建的 workspace `.gocache` 目录。
 - `id/id_interface.kit.go` 在 `git status` 中显示修改，但 `git diff` 内容为空，属于格式化/行尾提示带出的状态噪声，未做逻辑修改。
-- 用户指出单个 `docs/tool-guides.md` 文件过大，不利于后续按 kit 独立维护。已接受该设计调整：将每个工具的使用说明拆到对应目录文档，`docs/tool-guides.md` 仅保留索引和通用说明。
+- 用户指出单个工具使用指导总文档过大，不利于后续按 kit 独立维护。已接受该设计调整：将每个工具的使用说明拆到对应目录文档，总文档仅保留索引和通用说明。
 - 用户进一步确认目录文档应使用 GitHub/GitLab 默认展示的 `README.md`，不使用 `GUIDE.md`。
 - 已为每个 Go 工具目录新增或补充 `README.md`，内容保持为用途、基础用法、注意事项和验证命令。
-- 已将 `docs/tool-guides.md` 压缩为工具使用指导索引，只保留通用约定和各工具目录链接。
+- 已将工具使用指导总文档压缩为索引，只保留通用约定和各工具目录链接。
+- 用户已将工具使用指导总索引改为 `docs/README.md`，作为 GitHub/GitLab 打开 `docs/` 目录时的默认入口。
 - 已复查所有 Go 工具目录，结果为均已包含 `README.md`。
 - 用户指出当前工作不能只补测试和文档，还要逐目录扫描工具能力缺口并补充优化；示例为 `curl` 缺少 `context.Context` 支持和 PUT/DELETE 等常用 HTTP method 构造函数。后续执行范围扩展为：扫描每个工具目录，列举明确缺口，能低风险补齐的直接补代码、测试和 README；涉及高影响 API 变更时采用兼容新增，不破坏现有调用。
 - 已完成逐目录扫描并新增 `docs/test-and-tool-guides/audit.md`，列出每个目录的已处理项、暂未改代码原因和后续建议。
