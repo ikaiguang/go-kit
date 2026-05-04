@@ -1,0 +1,3 @@
+display_name: Code Audit Repair
+short_description: 全库审计、补测试、低风险修复和文档补全。
+default_prompt: 对当前代码库执行综合审计、补测试、低风险修复和文档补全。
