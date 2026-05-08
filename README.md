@@ -92,6 +92,7 @@ reply, err := downloadpkg.StreamDownload(ctx, &downloadpkg.DownloadParam{
 | [buffer](./buffer/README.md) | `bytes.Buffer` 复用 |
 | [chinese](./chinese/README.md) | 中文编码转换和检测 |
 | [cmd](./cmd/README.md) | 外部命令执行 |
+| [component](./component/README.md) | 懒加载组件和生命周期管理 |
 | [connection](./connection/README.md) | 连接和 WebSocket 请求判断 |
 | [curl](./curl/README.md) | HTTP 请求辅助 |
 | [download](./download/README.md) | HTTP 流式下载 |

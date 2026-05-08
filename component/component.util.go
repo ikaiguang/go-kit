@@ -1,4 +1,4 @@
-package setuputil
+package componentpkg
 
 import (
 	stderrors "errors"

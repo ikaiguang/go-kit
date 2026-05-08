@@ -118,4 +118,6 @@ mytest
 .env.*.local
 !.env.example
 
+/.agents/specs/
 /.kiro/specs/
+
