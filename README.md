@@ -182,6 +182,12 @@ go test ./...
 - 对应 `*_test.go`
 - 必要的错误路径、边界输入和安全回归测试
 
+## Give a star! ⭐
+
+如果您觉得这个项目有趣，或者对您有帮助，请给个 star 吧！
+
+If you think this project is interesting, or helpful to you, please give a star!
+
 ## License
 
-See [LICENSE](./LICENSE).
+本项目基于 [Apache License 2.0](LICENSE) 开源。
