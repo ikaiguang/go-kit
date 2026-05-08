@@ -8,8 +8,8 @@ git config user.signingkey 7D0275AFBB6646F4
 git config commit.gpgsign true
 
 # 3. 确保邮箱和 GPG/GitHub 一致（必须）
-git config user.email "yuelingmeimei@outlook.com"
-git config user.name "yuelingmeimei"
+git config user.email "ckaiguang@outlook.com"
+git config user.name "ckaiguang"
 ```
 
 # 协作流程
