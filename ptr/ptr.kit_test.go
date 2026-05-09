@@ -92,8 +92,7 @@ func TestSlice(t *testing.T) {
 
 func TestValueSlice(t *testing.T) {
 	// 测试正常切片
-	v1, v2, v3 := 1, 2, 3
-	a := []*int{&v1, &v2, &v3}
+	a := []*int{new(1), new(2), new(3)}
 	result := ValueSlice(a)
 	if len(result) != len(a) {
 		t.Fatalf("ValueSlice: len got %d, want %d", len(result), len(a))

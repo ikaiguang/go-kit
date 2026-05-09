@@ -1,6 +1,6 @@
 module github.com/ikaiguang/go-kit
 
-go 1.25.9
+go 1.26
 
 require (
 	github.com/bwmarrin/snowflake v0.3.0
