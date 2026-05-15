@@ -2,7 +2,7 @@
 
 ## 仓库标识
 
-- Go：`1.25.9`
+- Go：`1.26`
 
 ## 分层模型
 
@@ -17,16 +17,6 @@
 `Proto -> DTO -> BO -> PO`
 
 不要让 `Service` 层直接调用 `Data` 层。
-
-## 示例入口
-
-需要具体例子时，优先读这些文件：
-
-- `testdata/ping-service/cmd/ping-service/main.go`
-- `testdata/ping-service/cmd/ping-service/export/wire.go`
-- `testdata/ping-service/internal/service/service/ping.service.go`
-- `testdata/ping-service/internal/biz/biz/ping.biz.go`
-- `testdata/ping-service/internal/data/data/ping.data.go`
 
 ## 工具包关键文件
 

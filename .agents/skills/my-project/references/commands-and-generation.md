@@ -20,21 +20,13 @@ make run-service
 
 ```bash
 make protoc-api-protobuf
-make protoc-ping-v1-protobuf
 ```
 
-如果修改的是某个特定 API 区域，先检查 `api/` 和 `testdata/ping-service/` 下相关的 makefile。
+如果修改的是某个特定 API 区域，先检查 `api/` 下相关的 makefile。
 
 ## Wire 生成
 
-默认示例服务的 Wire 生成命令是：
-
-```bash
-make generate
-wire ./testdata/ping-service/cmd/ping-service/export
-```
-
-当前 `make generate` 实际也是包装这个命令。
+优先使用 `Makefile` 中对应的生成目标。
 
 ## Windows 注意事项
 

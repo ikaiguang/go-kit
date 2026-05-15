@@ -62,26 +62,11 @@
 2. 再通过 `cmd/*/export/main.export.go` 导出配置
 3. 最后通过 launcher manager 或包内既有路径读取配置
 
-引入新配置形态前，先对照示例服务实现。
-
 ## Wire 装配
 
 修改 provider 或构造函数后：
 
 1. 更新对应的 `wire.go`
-2. 运行：
-
-```bash
-wire ./testdata/ping-service/cmd/ping-service/export
-```
+2. 按 `Makefile` 中对应目标重新生成 Wire 输出
 
 不要手工修改生成的 `wire_gen.go`。
-
-## 首选参考路径
-
-如果不确定一个业务服务应如何接入，先从这些位置开始：
-
-- `testdata/ping-service/cmd/ping-service/export/wire.go`
-- `testdata/ping-service/internal/service/service/`
-- `testdata/ping-service/internal/biz/`
-- `testdata/ping-service/internal/data/`

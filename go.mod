@@ -7,6 +7,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/rs/xid v1.6.0
 	github.com/stretchr/testify v1.11.1
+	github.com/valyala/bytebufferpool v1.0.0
 	golang.org/x/crypto v0.50.0
 	golang.org/x/text v0.36.0
 	google.golang.org/protobuf v1.36.11

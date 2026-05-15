@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"strings"
 
-	bufferpkg "github.com/ikaiguang/go-kit/buffer"
+	"github.com/valyala/bytebufferpool"
 )
 
 // RunCommandContext 运行命令（支持 Context）
@@ -42,11 +42,11 @@ func RunCommandWithWorkDir(workDir, command string, args []string) (output []byt
 // run 运行命令
 func run(cmdHandler *exec.Cmd) (output []byte, err error) {
 	var (
-		stdout = bufferpkg.GetBuffer()
-		stderr = bufferpkg.GetBuffer()
+		stdout = bytebufferpool.Get()
+		stderr = bytebufferpool.Get()
 	)
-	defer bufferpkg.PutBuffer(stdout)
-	defer bufferpkg.PutBuffer(stderr)
+	defer bytebufferpool.Put(stdout)
+	defer bytebufferpool.Put(stderr)
 
 	cmdHandler.Stdout = stdout
 	cmdHandler.Stderr = stderr
