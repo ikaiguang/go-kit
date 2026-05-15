@@ -121,4 +121,6 @@ mytest
 /.agents/specs/
 /.kiro/specs/
 AGENTS.md:Zone.Identifier
+README.md:Zone.Identifier
+SKILL.md:Zone.Identifier
 
